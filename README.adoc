@@ -1,0 +1,56 @@
+= Softwareentwicklung im Team: Praktische Übung 4
+:icons: font
+:icon-set: fa
+:experimental:
+:source-highlighter: rouge
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+:stem: latexmath
+endif::[]
+
+== Vorbereitung 
+
+Die Vorbereitungsarbeiten müssen Sie *vor der praktischen Übung* abschließen. 
+
+Wir erwarten von Ihnen, dass Sie 
+
+* ein Headset o. ä. bereithalten und Ihr technisches Setup überprüfen. Die Korrektor:innen verwenden entweder WebEx oder Big Blue Button über https://senfcall.de/ 
+* den Aufgabentext unten gelesen und sich dazu schon Gedanken gemacht haben. 
+* die Anwendung einmal gestartet und durchgeklickt haben
+
+== Ziele der Übung
+
+In der Übung sollen Sie das Thema Zustand in Webanwendungen vertiefen. 
+
+== Ablauf der Übung
+
+. Schalten Sie *mindestens* das Mikrofon, aber besser auch die Kamera, ein 
+. Am Anfang gibt es eine kurze Vorstellungsrunde 
+. In der Gruppe wird kurz diskutiert, wie die Lösung angegangen werden soll, und es werden noch offene Fragen geklärt
+. Es wird festgelegt, in welcher Reihenfolge die Driver-Rolle übernommen wird
+. Die erste Person teilt Ihren Screen und übernimmt mithilfe von `mob` die Session
+. Es wird an der Problemstellung gemeinsam nach den Regeln des Mob-Programmings gearbeitet
+. Nach ca. der Hälfte der Zeit gibt es ein Feedback durch die Tutorin oder den Tutor
+. Es wird weiter an der Problemstellung gearbeitet
+. ca. 10 Minuten vor Ende der Session bekommen Sie Ihre Abschlussbewertung 
+
+== Aufgabe
+
+Der nächste große Spielehit ist das Online Rollenspiel "Game of Thorns". Wie wir alle wissen, ist der erste Schritt die Erstellung eines Charakters. Genau das wollen wir in dieser praktischen Übung als Spring Boot Anwendung umsetzen. 
+
+Im Repository sind zwei Kopien der Basisanwendung, bei denen zwar der grundsäztliche Flow umgesetzt ist, die aber den Zustand noch nicht behandelt und alle Eingaben ignoriert. 
+
+Sie dürfen den Code der Vorgabe beliebig anpassen, die einzige Ausnahme ist, dass es am Ende immer noch ein mehrstufiger Prozess sein soll. Sie dürfen also nicht einfach alle Formulare zusammenkopieren. 
+
+=== Session Attributes
+In der ersten Version wollen wir den Zustand mithilfe einer Session behandeln. Verwenden Sie also die `@ModelAttribute` und `@SessionAttributes` Annotationen. Es ist hier vermutlich sinnvoll/notwendig, den Zustand der Anwendung in einem Objekt zu kapseln. 
+
+
+=== Stateless 
+Hier sollen die Werte über `hidden` Attribute durch die Formulare mitgeschleift werden. 
+
+NOTE: Wenn noch etwas Zeit ist, können Sie auch einmal versuchen, das Problem über einen Session Scope zu lösen. 
