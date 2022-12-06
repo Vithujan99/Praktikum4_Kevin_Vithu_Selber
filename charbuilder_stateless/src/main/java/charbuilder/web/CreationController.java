@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CreationController {
@@ -24,15 +25,15 @@ public class CreationController {
   }
 
   @PostMapping("/create/1")
-  public String createStep1(String charactername) {
+  public String createStep1(RedirectAttributes redirectAttributes, String charactername) {
     if (charactername == null || charactername.isBlank()) return "name";
+    CharacterInfo character = new CharacterInfo(charactername);
+    redirectAttributes.addFlashAttribute("character", character);
     return "redirect:/create/2";
   }
 
   @GetMapping("/create/2")
   public String createClassForm(Model m) {
-    CharacterInfo character = new CharacterInfo("Laime Jannister");
-    m.addAttribute("character", character);
     return "class";
   }
 
