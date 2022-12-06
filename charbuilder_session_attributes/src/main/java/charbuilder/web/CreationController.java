@@ -63,14 +63,12 @@ public class CreationController {
     character.setAttribute("Wisdom", wis);
     character.setAttribute("Charisma", cha);
 
-    if (!character.isValid()){
-      character.setCharacterClass(character.getCharacterclass());
-    }
-
     // Character fertigstellen und validieren
 
     // Fehler: Formular wieder anzeigen, Werte müssen erhalten bleiben
-
+    if (!character.isValid()){
+      return "attributes";
+    }
     // Erfolg: Ausgabe der Spielerinformationen auf der Konsole und zurück zur Startseite
 
     return "redirect:/";
