@@ -5,13 +5,15 @@ import charbuilder.character.CharacterInfo;
 import java.util.Random;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+@SessionAttributes("character")
 @Controller
 public class CreationController {
-
+  @ModelAttribute("character")
+  public CharacterInfo character(){
+    return new CharacterInfo();
+  }
 
   @GetMapping("/")
   public String index() {
@@ -24,43 +26,46 @@ public class CreationController {
   }
 
   @PostMapping("/create/1")
-  public String createStep1(String charactername) {
+  public String createStep1(String charactername, @ModelAttribute("character") CharacterInfo character) { // CharacterInfo character
     if (charactername == null || charactername.isBlank()) return "name";
+    character.setName(charactername);
     return "redirect:/create/2";
   }
 
   @GetMapping("/create/2")
-  public String createClassForm(Model m) {
-    CharacterInfo character = new CharacterInfo("Laime Jannister");
-    m.addAttribute("character", character);
+  public String createClassForm() {
     return "class";
   }
 
   @PostMapping("/create/2")
-  public String createStep3(CharacterClass characterclass) {
-    CharacterInfo character = new CharacterInfo("Laime Jannister");
-    character.setCharacterClass(CharacterClass.WARRIOR);
-
-    return
-        "redirect:/create/3";
+  public String createStep3(@ModelAttribute("character") CharacterInfo character, CharacterClass characterclass) {
+    character.setCharacterClass(characterclass);
+    return "redirect:/create/3";
   }
 
   @GetMapping("/create/3")
-  public String createAttributeForm(Model m) {
-    CharacterInfo character = new CharacterInfo("Laime Jannister");
-    character.setCharacterClass(CharacterClass.WARRIOR);
-    m.addAttribute("character", character);
+  public String createAttributeForm() {
     return "attributes";
   }
 
   @PostMapping("/create/3")
-  public String createStep3(Model m,
+  public String createStep3(@ModelAttribute("character") CharacterInfo character,
                             @RequestParam("Strength") int str,
                             @RequestParam("Dexterity") int dex,
                             @RequestParam("Constitution") int con,
                             @RequestParam("Intelligence") int intl,
                             @RequestParam("Wisdom") int wis,
                             @RequestParam("Charisma") int cha) {
+    character.setAttribute("Strength", str);
+    character.setAttribute("Dexterity", dex);
+    character.setAttribute("Constitution", con);
+    character.setAttribute("Intelligence", intl);
+    character.setAttribute("Wisdom", wis);
+    character.setAttribute("Charisma", cha);
+
+    if (!character.isValid()){
+      character.setCharacterClass(character.getCharacterclass());
+    }
 
     // Character fertigstellen und validieren
 

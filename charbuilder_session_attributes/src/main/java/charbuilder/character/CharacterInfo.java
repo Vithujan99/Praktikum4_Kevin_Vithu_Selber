@@ -21,6 +21,8 @@ public class CharacterInfo {
     this.name = name;
   }
 
+  public CharacterInfo(){}
+
   public Integer getAttribute(String name) {
     return attributes.getOrDefault(name, 0);
   }
@@ -47,7 +49,7 @@ public class CharacterInfo {
   public void setCharacterClass(CharacterClass characterclass) {
     this.characterclass = characterclass;
     Random r = new Random();
-    int points = r.nextInt(-4, 5);
+    int points = r.nextInt(-4,5);
     setPoints(30 + points);
     setAttribute("Strength", minPoints("Strength"));
     setAttribute("Dexterity", minPoints("Dexterity"));
