@@ -41,6 +41,9 @@
 </header>
 <section class="container">
     <form method="post" id="classform">
+        <input type="hidden"
+               name="characterName"
+               th:value="${character.name}">
         <div class="row">
             <h2 class="text-white-50" aria-label="">Select your class</h2>
         </div>

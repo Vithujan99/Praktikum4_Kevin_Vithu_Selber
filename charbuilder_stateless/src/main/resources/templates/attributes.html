@@ -43,6 +43,15 @@
 </header>
 <section class="container">
     <form method="post" id="classform">
+        <input type="hidden"
+               name="characterName"
+               th:value="${character.name}">
+        <input type="hidden"
+               name="characterclass"
+               th:value="${character.characterclass}">
+        <input type="hidden"
+               name="points"
+               th:value="${points}">
         <div class="row">
             <h2 class="text-white-50" aria-label="">Distribute your attribute points</h2>
             <p class="text-white-50">The effective value (i.e. the value you entered plus/minus the class bonus/malus)

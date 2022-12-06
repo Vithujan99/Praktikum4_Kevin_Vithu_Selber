@@ -38,31 +38,43 @@ public class CreationController {
   }
 
   @PostMapping("/create/2")
-  public String createStep3(CharacterClass characterclass) {
-    CharacterInfo character = new CharacterInfo("Laime Jannister");
-    character.setCharacterClass(CharacterClass.WARRIOR);
-
-    return
-        "redirect:/create/3";
+  public String createStep3(String characterName,CharacterClass characterclass, RedirectAttributes redirectAttributes) {
+    CharacterInfo character = new CharacterInfo(characterName);
+    character.setCharacterClass(characterclass);
+    Integer points = character.getPoints();
+    redirectAttributes.addFlashAttribute("character", character);
+    redirectAttributes.addFlashAttribute("points",points);
+    return "redirect:/create/3";
   }
 
   @GetMapping("/create/3")
-  public String createAttributeForm(Model m) {
-    CharacterInfo character = new CharacterInfo("Laime Jannister");
-    character.setCharacterClass(CharacterClass.WARRIOR);
-    m.addAttribute("character", character);
+  public String createAttributeForm() {
     return "attributes";
   }
 
   @PostMapping("/create/3")
-  public String createStep3(Model m,
+  public String createStep3(String characterName, CharacterClass characterclass, Integer points, Model m,
                             @RequestParam("Strength") int str,
                             @RequestParam("Dexterity") int dex,
                             @RequestParam("Constitution") int con,
                             @RequestParam("Intelligence") int intl,
                             @RequestParam("Wisdom") int wis,
                             @RequestParam("Charisma") int cha) {
-
+    CharacterInfo character = new CharacterInfo(characterName);
+    character.setCharacterClass(characterclass);
+    character.setPoints(points);
+    character.setAttribute("Strength",str);
+    character.setAttribute("Dexterity", dex);
+    character.setAttribute("Constitution", con);
+    character.setAttribute("Intelligence", intl);
+    character.setAttribute("Wisdom", wis);
+    character.setAttribute("Charisma", cha);
+    m.addAttribute("character", character);
+    m.addAttribute("points",points);
+    if(!character.isValid()){
+      return "attributes";
+    }
+    System.out.println(character);
     // Character fertigstellen und validieren
 
     // Fehler: Formular wieder anzeigen, Werte müssen erhalten bleiben
